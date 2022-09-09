@@ -1,6 +1,6 @@
 import { Container, Rating } from '@mui/material'
 import { Box } from '@mui/system'
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -13,15 +13,14 @@ import { getJSONFromResponse } from '../../util/getJSONFromResponse'
 
 type MoviePageProps = { movie: Movie; reviews: Review[] }
 
+// The specific movie page
 const MoviePage: NextPage<MoviePageProps> = ({ movie, reviews }) => {
 	const [reviewList, setReviewList] = useState(reviews)
 
 	const handleUpdateReviewList = (review: Review) => {
-		console.log(review)
 		setReviewList((prevState) => {
 			return [...prevState, review]
 		})
-		console.log(reviewList)
 	}
 	return (
 		<div className={styles.container}>
@@ -53,8 +52,13 @@ const MoviePage: NextPage<MoviePageProps> = ({ movie, reviews }) => {
 
 export default MoviePage
 
-export async function getServerSideProps(context) {
-	const title = context.params.movie
+type MoviePageContextParams = { movie: string }
+
+export const getServerSideProps: GetServerSideProps<
+	MoviePageProps,
+	MoviePageContextParams
+> = async (context) => {
+	const title = context.params?.movie
 	const movieRequest = new Request(
 		`http://localhost:3000/api/getMovieByTitle?title=${title}`
 	)

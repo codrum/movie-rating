@@ -2,6 +2,7 @@ import { Movie } from '../../types/Movie'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { movies } from '../../data/movies'
 
+// Fetches movies from movie.js and returns as promise
 const getMovieByTitle = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Movie>

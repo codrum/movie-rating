@@ -3,6 +3,7 @@ import {
 	Grid,
 	Paper,
 	Rating,
+	RatingProps,
 	TextField,
 	Typography,
 } from '@mui/material'
@@ -39,12 +40,16 @@ export const ReviewForm: FC<ReviewFormProps> = ({
 		HTMLTextAreaElement | HTMLInputElement
 	> = (evt) => {
 		let value = evt.target.value
-		console.log(value)
-
-		setState({
-			...state,
+		setState((prevState) => ({
+			...prevState,
 			[evt.target.name]: value,
-		})
+		}))
+	}
+	const handleRatingChange: RatingProps['onChange'] = (evt, value) => {
+		setState((prevState) => ({
+			...prevState,
+			rating: (value || 0).toString(),
+		}))
 	}
 	return (
 		<Paper elevation={3}>
@@ -95,7 +100,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
 					<Rating
 						name='rating'
 						value={parseInt(state.rating)}
-						onChange={handleChange}
+						onChange={handleRatingChange}
 					/>
 				</Grid>
 				<Button

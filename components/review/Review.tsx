@@ -1,9 +1,9 @@
 import { Paper, Rating, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { FC } from 'react'
-import { Review } from '../../types/Review'
+import { Review as ReviewType } from '../../types/Review'
 
-type ReviewProps = { review: Review }
+type ReviewProps = { review: ReviewType }
 
 export const Review: FC<ReviewProps> = ({ review }) => {
 	return (

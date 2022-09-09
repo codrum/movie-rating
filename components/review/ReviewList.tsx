@@ -10,7 +10,7 @@ export const ReviewList: FC<ReviewListProps> = ({ reviews }) => {
 			{reviews.map((review) => {
 				return (
 					<Review
-						key={review.id + review.title + review.review}
+						key={review.id + review.name + review.review} //horrible way of handling this but solves the id updating bug
 						review={review}
 					/>
 				)

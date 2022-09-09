@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { reviews } from '../../data/reviews'
 import { Review } from '../../types/Review'
 
+// gets the reviews of the movie id
 const getReviewsForMovie = async (
 	req: NextApiRequest,
 	res: NextApiResponse<Review[]>
